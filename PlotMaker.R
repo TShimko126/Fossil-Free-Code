@@ -87,15 +87,17 @@ plotType = function() {
     names(zipData) = c("zip","city","state","latitude","longitude","freq")
     map_dat = map_data("state")
     plot_national = ggplot(data = map_dat, aes(x = long, y = lat)) + geom_polygon(data = map_dat, aes(x = long, y = lat, group = group), fill = "gray", colour = "black", lwd = .5) + geom_point(data = zipData, aes(x = longitude, y = latitude, size = freq, colour = state), alpha = .5) + scale_size_continuous(range = c(4, 10)) + theme_bw()
-    plot_national
+    plot(plot_national)
   }
   else if (type == "signature"){
     sigs = formatSigs()
     cDate = as.character(Sys.time())
     plot_sigs = ggplot(data = sigs, aes(x = Day, y = cumsum(Frequency))) + geom_line(colour = "orange", lwd = 2) + geom_point(color = "black") + labs(x = "Date", y = "Total Signatures") + ggtitle(paste0("Petition Signatures Over Time\nCurent as of: ",cDate))
-    plot_sigs
+    plot(plot_sigs)
   } 
   else {
     stop("That is not a valid plot type.")
   }
 }
+
+plotType()
